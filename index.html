@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f3f6fb">
+  <meta name="description" content="В команде — демонстрация адаптации сотрудников: создание профиля, обучение по специальности, чат-помощник и кабинет HR. Все данные вымышлены.">
+  <title>В команде — адаптация сотрудников</title>
+  <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="./assets/onest-variable.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="stylesheet" href="./styles.css?v=6">
+  <link rel="stylesheet" href="./air.css?v=2">
+  <script src="./icons.js?v=3" defer></script>
+  <script src="./training-data.js?v=3" defer></script>
+  <script src="./app.js?v=6" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Перейти к содержимому</a>
+  <aside class="sidebar" aria-label="Навигация">
+    <a class="brand" href="#home" aria-label="В команде — на главную"><span class="brand-symbol" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M4 24 13 8h6L10 24Z" fill="#ed7734"/><path d="m15 24 9-16h5l-9 16Z" fill="#315fe2"/></svg></span><span>в команде<span class="brand-dot">.</span></span></a>
+    <nav class="side-nav" id="side-nav"></nav>
+    <div class="side-route" id="side-route"></div>
+    <div class="sidebar-bottom"><div class="side-help"><span class="help-mark">?</span><p>Обучение, помощь и прогресс — в одном месте.</p><a href="#about">Как устроена симуляция <span aria-hidden="true">↗</span></a></div><a class="demo-link" href="#about">Все данные вымышлены <span class="demo-dot"></span></a></div>
+  </aside>
+  <div class="app-shell">
+    <header class="topbar">
+      <a href="#home" class="mobile-brand"><span class="brand-symbol" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M4 24 13 8h6L10 24Z" fill="#ed7734"/><path d="m15 24 9-16h5l-9 16Z" fill="#315fe2"/></svg></span>в команде.</a>
+      <span class="topbar-title" id="topbar-title">Адаптация сотрудников</span>
+      <div class="topbar-actions"><button class="icon-button" id="search-trigger" aria-label="Найти в справочнике"></button><button class="icon-button notification" id="notifications" aria-label="Открыть чат и ответы наставника"></button><a class="demo-badge" href="#about">Демоверсия</a></div>
+    </header>
+    <div class="demo-toolbar"><nav id="demo-modes" aria-label="Роли демонстрации"></nav><span class="local-caption" id="storage-caption">Мок-данные · этот браузер</span></div>
+    <div id="employee-context"></div>
+    <main id="main" tabindex="-1"></main>
+    <footer class="footer"><span>Маленькие шаги. Уверенное начало.</span><span>Симуляция · вымышленные сотрудники · локальное сохранение</span></footer>
+  </div>
+  <nav class="mobile-nav" id="mobile-nav" aria-label="Навигация на телефоне"></nav>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
