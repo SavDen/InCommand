@@ -245,31 +245,6 @@ document.getElementById('search-trigger').addEventListener('click',()=>{go('know
 document.getElementById('notifications').addEventListener('click',()=>go('chat/mentor'));
 document.querySelector('.skip-link').addEventListener('click',ev=>{ev.preventDefault();main.focus();main.scrollIntoView();});
 window.addEventListener('hashchange',render);
-function installAirMotion() {
-  const media=window.matchMedia('(prefers-reduced-motion: reduce)');
-  if(!('IntersectionObserver' in window)||!('MutationObserver' in window))return;
-  const seen=new WeakSet();
-  const viewportObserver=new IntersectionObserver(entries=>{
-    entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('air-visible');viewportObserver.unobserve(entry.target);}});
-  },{threshold:.01,rootMargin:'0px 0px 24px 0px'});
-  const targets='.welcome-row,.page-intro,.next-lesson,.overall-progress,.section-heading,.days,.route-list,.resource,.mentor-card,.mood-card,.note-card,.content-panel,.faq-list details,.chat-tabs,.chat-disclosure,.chat-welcome,.suggested-questions>button,.chat-exchange,.thread,.hr-summary>div,.hr-summary>a,.hr-filterbar,.employee-table tbody tr,.setup-explanation,.air-integration,.setup-tracks>h2,.track-summary';
-  function enhance() {
-    main.querySelectorAll(targets).forEach((element,index)=>{
-      if(seen.has(element))return;
-      seen.add(element);
-      if(media.matches)return;
-      element.style.setProperty('--air-delay',Math.min(index%6*30,150)+'ms');
-      element.classList.add('air-reveal');
-      viewportObserver.observe(element);
-    });
-  }
-  // Dynamic chat, quiz feedback and HR filters share the same presentation layer.
-  let frame;
-  const changes=new MutationObserver(()=>{cancelAnimationFrame(frame);frame=requestAnimationFrame(enhance);});
-  changes.observe(main,{childList:true,subtree:true});
-  media.addEventListener('change',()=>{
-    if(media.matches){main.querySelectorAll('.air-reveal').forEach(element=>element.classList.add('air-visible'));viewportObserver.disconnect();}
-  });
-  enhance();
-}
-save();render();installAirMotion();
+// A single CSS page entrance keeps scrolling independent of animation work.
+// Dynamic answers, messages and controls animate through their own CSS states.
+save();render();

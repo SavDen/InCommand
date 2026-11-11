@@ -13,7 +13,7 @@
 [data-profession=retail]{--profession:#0c7971;--profession-bg:#e3f5ef}
 [data-profession=sales]{--profession:#6950ba;--profession-bg:#f0ebff}
 [data-profession=office]{--profession:#946111;--profession-bg:#fff1d6}
-body{background:radial-gradient(ellipse 760px 450px at 0 0,#dce7ff85,transparent 75%),radial-gradient(ellipse 650px 400px at 100% 20%,#ffe7d04a,transparent 75%),var(--bg);background-attachment:fixed}
+body{background:radial-gradient(ellipse 760px 450px at 0 0,#dce7ff85,transparent 75%),radial-gradient(ellipse 650px 400px at 100% 20%,#ffe7d04a,transparent 75%),var(--bg);background-attachment:scroll;background-size:100% 620px;background-repeat:no-repeat}
 ::selection{background:#d9e6ff;color:#193660}
 input,textarea{caret-color:var(--accent)}
 input::placeholder,textarea::placeholder{color:#667085;opacity:1}
@@ -76,7 +76,7 @@ main{padding:32px 36px 48px}
 .hero-art .route-dot{fill:#5ce6c5;stroke:#3466ec}
 .hero-art .art-circle{fill:#fff;stroke:#d5e1ff}
 .hero-art .art-circle+path{stroke:#2d5ddb;stroke-width:2}
-.primary-button{border-radius:10px;min-height:48px;background:linear-gradient(var(--action),var(--action-end));color:var(--action-ink);box-shadow:0 3px 1px #b95723,0 8px 14px -7px #b9572359,inset 0 1px 0 #ffcca6;transition:background .16s,transform .16s,box-shadow .16s}
+.primary-button{border-radius:10px;min-height:48px;background:linear-gradient(var(--action),var(--action-end));color:var(--action-ink);box-shadow:0 3px 1px #b95723,0 8px 14px -7px #b9572359,inset 0 1px 0 #ffcca6;transition:background .16s,transform .16s}
 .primary-button:hover{background:linear-gradient(#ffa05f,#f58b46);transform:translateY(-1px);box-shadow:0 4px 1px #b95723,0 11px 16px -8px #b9572366,inset 0 1px 0 #ffe0c5}
 .primary-button:active{transform:translateY(2px);box-shadow:0 1px 1px #b95723,0 3px 6px -3px #b9572340}
 .primary-button:disabled{opacity:.55;transform:none;box-shadow:none}
@@ -107,7 +107,7 @@ main{padding:32px 36px 48px}
 .row-pill{color:#2857d8;font-weight:600}
 .row-arrow{color:#6a7c96}
 .meta-dot{background:#93a2b8}
-.resource{border:0;padding:18px;background:#fff;border-radius:14px;box-shadow:var(--shadow-panel);align-items:center;transition:transform .16s,box-shadow .16s}
+.resource{border:0;padding:18px;background:#fff;border-radius:14px;box-shadow:var(--shadow-panel);align-items:center;transition:transform .16s}
 .resource:hover{background:#fff;transform:translateY(-2px);box-shadow:var(--shadow-raised)}
 .resource>.icon:first-child{color:#315fe2;background:#e8efff;width:40px;height:40px;padding:10px;border-radius:11px}
 .resource:nth-child(2)>.icon:first-child{color:#0b7a72;background:#e3f5ef}
@@ -489,24 +489,22 @@ main{padding:32px 36px 48px}
 }
 @media(prefers-reduced-motion:reduce){.primary-button,.resource{transition:none}.primary-button:hover,.resource:hover{transform:none}}
 
-/* Clear glass belongs to the floating chrome; reading surfaces stay legible. */
+/* Keep the glass highlight, but bound live blur to one desktop surface. */
+.demo-toolbar,.mobile-nav{background:#fffffff0;box-shadow:var(--shadow-control),inset 0 1px 0 #fff,inset 1px 0 0 #ffffffa6}
+.mobile-nav{box-shadow:0 7px 30px -5px #1f396340,0 1px 3px #1f396310,inset 0 1px 0 #fff}
+.content-panel,.mentor-card,.mood-card,.chat-welcome{background:#fffffff2}
+.air-setup .setup-form-panel{background:#fffffff5}
 @supports ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
- .sidebar,.demo-toolbar,.mobile-nav{background:#ffffffc9;backdrop-filter:blur(20px) saturate(130%);-webkit-backdrop-filter:blur(20px) saturate(130%)}
- .sidebar{box-shadow:var(--shadow-panel),inset 0 1px 0 #fff,inset 1px 0 0 #ffffffb3}
- .demo-toolbar,.mobile-nav{box-shadow:var(--shadow-control),inset 0 1px 0 #fff,inset 1px 0 0 #ffffffa6}
- .mobile-nav{box-shadow:0 7px 30px -5px #1f396340,0 1px 3px #1f396310,inset 0 1px 0 #fff}
- .content-panel,.mentor-card,.mood-card,.chat-welcome{background:#ffffffeb;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
- .air-setup .setup-form-panel{background:#fffffff0}
- @media(max-width:760px){.topbar{background:#f7faffdc;backdrop-filter:blur(20px) saturate(125%);-webkit-backdrop-filter:blur(20px) saturate(125%)}}
+ .sidebar{background:#ffffffdc;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:var(--shadow-panel),inset 0 1px 0 #fff,inset 1px 0 0 #ffffffb3}
+ @media(max-width:980px),(hover:none){.sidebar{background:#fffffff0;backdrop-filter:none;-webkit-backdrop-filter:none}}
 }
+@media(max-width:760px){.topbar{background:#f7fafff5}}
 
-/* Motion: every surface enters once; interactive elements respond in place. */
-.sidebar,.topbar{animation:air-shell .45s cubic-bezier(.16,1,.3,1) both}
-.demo-toolbar,.employee-context-inner{animation:air-shell .45s .05s cubic-bezier(.16,1,.3,1) both}
-.mobile-nav{animation:air-dock .4s .1s cubic-bezier(.16,1,.3,1) both}
-.air-reveal{opacity:0;transform:translateY(12px);transition:opacity .45s cubic-bezier(.16,1,.3,1),transform .45s cubic-bezier(.16,1,.3,1);transition-delay:var(--air-delay,0ms)}
-.air-reveal.air-visible{opacity:1;transform:translateY(0)}
-.primary-button,.secondary-button,.icon-button,.nav-item,.mode-link,.day-button,.chat-tabs button,.mood-option,.source-switch label,.answer-option,.suggested-questions button,.role-chip,.row-open{transition:color .18s,background .18s,border-color .18s,box-shadow .18s,transform .18s}
+/* One short page/chrome entrance; no reveal work is scheduled by scrolling. */
+.sidebar,.topbar{animation:air-shell .45s cubic-bezier(.16,1,.3,1) backwards}
+.demo-toolbar,.employee-context-inner{animation:air-shell .45s .05s cubic-bezier(.16,1,.3,1) backwards}
+.mobile-nav{animation:air-dock .4s .1s cubic-bezier(.16,1,.3,1) backwards}
+.primary-button,.secondary-button,.icon-button,.nav-item,.mode-link,.day-button,.chat-tabs button,.mood-option,.source-switch label,.answer-option,.suggested-questions button,.role-chip,.row-open{transition:color .18s,background .18s,border-color .18s,transform .18s}
 .primary-button:hover,.secondary-button:hover,.icon-button:hover,.suggested-questions button:hover{transform:translateY(-1px)}
 .primary-button:active,.secondary-button:active,.icon-button:active,.nav-item:active,.mode-link:active,.day-button:active,.chat-tabs button:active,.mood-option:active,.suggested-questions button:active,.row-open:active{transform:translateY(1px) scale(.985)}
 .primary-button:disabled:hover{transform:none}
@@ -517,27 +515,29 @@ main{padding:32px 36px 48px}
 .text-input,textarea,.search-field input{transition:background .18s,border-color .18s,box-shadow .18s}
 .text-input:hover,textarea:hover,.search-field input:hover{border-color:#a5bce8}
 .text-input:focus,textarea:focus,.search-field input:focus{box-shadow:0 0 0 4px #315fe214,inset 0 1px 2px #315fe205}
-.content-panel,.mentor-card,.mood-card,.thread,.faq-list details,.chat-welcome{transition:opacity .45s cubic-bezier(.16,1,.3,1),transform .45s cubic-bezier(.16,1,.3,1),box-shadow .2s;transition-delay:var(--air-delay,0ms),var(--air-delay,0ms),0ms}
-.resource{transition:opacity .45s cubic-bezier(.16,1,.3,1),transform .25s cubic-bezier(.16,1,.3,1),box-shadow .2s;transition-delay:var(--air-delay,0ms),0ms,0ms}
-.resource.air-visible:hover{transform:translateY(-2px)}
-.progress-track>span{transform-origin:left center;animation:air-progress .7s cubic-bezier(.16,1,.3,1) both;transition:width .55s cubic-bezier(.16,1,.3,1)}
-.faq-list details[open] .faq-answer,.integration-details[open]>.mapping-scroll,.integration-details[open]>p{animation:air-disclosure .28s cubic-bezier(.16,1,.3,1) both}
-.feedback,.success-mark,.assignment-preview:has(.assignment-title){animation:air-feedback .35s cubic-bezier(.16,1,.3,1) both}
-.chat-bubble{animation:air-message .35s cubic-bezier(.16,1,.3,1) both}
+.progress-track>span{transform-origin:left center;animation:air-progress .7s cubic-bezier(.16,1,.3,1) backwards}
+.faq-list details[open] .faq-answer,.integration-details[open]>.mapping-scroll,.integration-details[open]>p{animation:air-disclosure .28s cubic-bezier(.16,1,.3,1) backwards}
+.feedback,.success-mark,.assignment-preview:has(.assignment-title){animation:air-feedback .35s cubic-bezier(.16,1,.3,1) backwards}
+.chat-bubble{animation:air-message .35s cubic-bezier(.16,1,.3,1) backwards}
 .bot-bubble{animation-delay:.08s}
 .unread-dot{animation:air-notice .65s ease-out 2}
-.hero-art{animation:air-track .8s cubic-bezier(.16,1,.3,1) both}
+.hero-art{animation:air-track .8s cubic-bezier(.16,1,.3,1) backwards}
 @keyframes air-progress{from{transform:scaleX(0)}to{transform:scaleX(1)}}
 @keyframes air-disclosure{from{opacity:.3;transform:translateY(-4px)}to{opacity:1;transform:translateY(0)}}
 @keyframes air-feedback{from{opacity:.4;transform:translateY(5px) scale(.985)}to{opacity:1;transform:translateY(0) scale(1)}}
 @keyframes air-message{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-@keyframes air-notice{50%{box-shadow:0 0 0 5px #ed773426}}
+@keyframes air-notice{50%{transform:scale(1.35);opacity:.65}}
 @keyframes air-track{from{opacity:.1;transform:rotate(-14deg) translateY(14px)}to{transform:rotate(-10deg) translateY(0)}}
 @keyframes air-shell{from{opacity:.3;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
 @keyframes air-dock{from{opacity:.3;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 @media(prefers-reduced-motion:reduce){
- .air-reveal{opacity:1;transform:none;transition:none}
- .air-reveal.air-visible{transform:none}
- .primary-button:hover,.secondary-button:hover,.icon-button:hover,.resource.air-visible:hover,.suggested-questions button:hover{transform:none}
+ .primary-button:hover,.secondary-button:hover,.icon-button:hover,.resource:hover,.suggested-questions button:hover{transform:none}
  .primary-button:active,.secondary-button:active,.icon-button:active,.nav-item:active,.mode-link:active,.day-button:active,.chat-tabs button:active,.mood-option:active,.suggested-questions button:active,.row-open:active{transform:none}
+}
+
+/* Touch scrolling must not leave a hovered card promoted or repainting shadows. */
+@media(hover:none){
+ .resource:hover{transform:none;box-shadow:var(--shadow-panel)}
+ .primary-button:hover,.secondary-button:hover,.icon-button:hover,.suggested-questions button:hover{transform:none}
+ .nav-item:hover .icon,.row-open:hover .icon,.subtle-link:hover .icon,.back-link:hover .icon{transform:none}
 }

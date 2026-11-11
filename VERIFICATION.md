@@ -96,3 +96,11 @@
 - Copied the latest Onest build into the repository root with relative URLs, font licence and source record. Added .nojekyll and branch/root publication instructions.
 - Adjusted existing model tests to read root JavaScript files. Excluded .git, .openai, .impeccable, local screenshots and archives from the transferred source.
 - GitHub publication itself is left to the repository owner.
+
+
+## Scroll optimization · 2026-11-11
+
+- Updated Air rendering in the standalone InCommand project: no live backdrop blur on mobile/touch, bounded desktop blur, document-scrolling background and no scroll-triggered reveal observers. Existing behavior/data schema unchanged.
+- Recorded before/after rAF samples and rendering-effect inventories with native browser scrolling. On this machine both were near 60Hz; no measured FPS gain is claimed. Structural reductions and exact numbers are in PERFORMANCE.md.
+- Checked 40 route/viewport combinations (10 routes × 320/390/768/1440): no root overflow or hidden reveal blocks. Passed quiz, bot message and HR search/progress checks; no browser console errors. Existing model tests passed.
+- Test instrumentation and before/after snapshots stayed outside the repository. GitHub publication is left to the repository owner; physical-device GPU performance remains unverified.
